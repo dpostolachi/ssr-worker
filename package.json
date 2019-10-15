@@ -8,6 +8,9 @@
     "start": "node index.js",
     "watch": "nodemon index.js"
   },
+  "engines": {
+    "node": "12.11.1"
+  },
   "dependencies": {
     "@babel/core": "^7.6.4",
     "@babel/plugin-transform-modules-commonjs": "^7.6.0",
