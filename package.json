@@ -1,0 +1,20 @@
+{
+  "name": "ssr-worker",
+  "version": "0.0.1",
+  "description": "Render react with workers",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "dependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-transform-modules-commonjs": "^7.6.0",
+    "@babel/preset-react": "^7.6.3",
+    "@babel/register": "^7.6.2",
+    "@reach/router": "^1.2.1",
+    "koa": "^2.10.0",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2"
+  }
+}
