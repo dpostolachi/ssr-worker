@@ -1,7 +1,6 @@
 import { Worker } from "worker_threads"
 import { randomBytes } from "crypto"
 import { Readable } from 'stream'
-import { Duplex } from "stream"
 
 const ReqMap = new Map()
 

@@ -1,5 +1,4 @@
 import koa from "koa"
-import { Worker } from "worker_threads"
 import proccessReq from "./processReq"
 
 const app = new koa()
