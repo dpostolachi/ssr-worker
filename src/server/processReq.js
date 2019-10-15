@@ -1,11 +1,13 @@
 import { Worker } from "worker_threads"
 import { randomBytes } from "crypto"
+import { Readable } from 'stream'
+import { Duplex } from "stream"
 
 const ReqMap = new Map()
 
 const worker = new Worker("./src/worker/spawn.js")
 
-worker.on( "message", ( [ reqId, html ] ) => ReqMap.get( reqId )( html ) )
+worker.on( "message", ( [ reqId, part ] ) => ReqMap.get( reqId )( part ) )
 
 const processReq = ( ctx ) => {
 
@@ -17,10 +19,24 @@ const processReq = ( ctx ) => {
 
 			const reqId = buff.toString( "hex" )
 
-			ReqMap.set( reqId, ( html ) => {
+			ctx.set('Content-Type', 'text/html');
 
-				ctx.body = html
-				resolve()
+			const readable = new Readable()
+			readable._read = () => {}
+
+			ctx.body = readable
+			resolve()
+
+			readable.push( "<!DOCTYPE html>" )
+
+			ReqMap.set( reqId, ( part ) => {
+			
+				if ( part === null ) {
+					readable.push( null )
+				} else {
+					const buff = new Buffer.from( part )
+					readable.push( buff )
+				}
 
 			} )
 
